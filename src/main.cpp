@@ -22,6 +22,7 @@
 #include "activities/home/HomeActivity.h"
 #include "activities/home/MyLibraryActivity.h"
 #include "activities/home/RecentBooksActivity.h"
+#include "activities/standby_display/StandbyDisplayActivity.h"
 #include "activities/network/CrossPointWebServerActivity.h"
 #include "activities/reader/ReaderActivity.h"
 #include "activities/settings/SettingsActivity.h"
@@ -237,6 +238,11 @@ void onGoToRecentBooks() {
   enterNewActivity(new RecentBooksActivity(renderer, mappedInputManager, onGoHome, onGoToReader));
 }
 
+void onGoToStandbyDisplay() {
+  exitActivity();
+  enterNewActivity(new StandbyDisplayActivity(renderer, mappedInputManager, onGoHome));
+}
+
 void onGoToMyLibraryWithPath(const std::string& path) {
   exitActivity();
   enterNewActivity(new MyLibraryActivity(renderer, mappedInputManager, onGoHome, onGoToReader, path));
@@ -249,7 +255,7 @@ void onGoToBrowser() {
 
 void onGoHome() {
   exitActivity();
-  enterNewActivity(new HomeActivity(renderer, mappedInputManager, onGoToReader, onGoToMyLibrary, onGoToRecentBooks,
+  enterNewActivity(new HomeActivity(renderer, mappedInputManager, onGoToReader, onGoToMyLibrary, onGoToRecentBooks, onGoToStandbyDisplay,
                                     onGoToSettings, onGoToFileTransfer, onGoToBrowser));
 }
 

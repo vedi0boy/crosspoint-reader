@@ -30,6 +30,7 @@ class HomeActivity final : public Activity {
   const std::function<void(const std::string& path)> onSelectBook;
   const std::function<void()> onMyLibraryOpen;
   const std::function<void()> onRecentsOpen;
+  const std::function<void()> onStandbyDisplayOpen;
   const std::function<void()> onSettingsOpen;
   const std::function<void()> onFileTransferOpen;
   const std::function<void()> onOpdsBrowserOpen;
@@ -47,13 +48,14 @@ class HomeActivity final : public Activity {
  public:
   explicit HomeActivity(GfxRenderer& renderer, MappedInputManager& mappedInput,
                         const std::function<void(const std::string& path)>& onSelectBook,
-                        const std::function<void()>& onMyLibraryOpen, const std::function<void()>& onRecentsOpen,
+                        const std::function<void()>& onMyLibraryOpen, const std::function<void()>& onRecentsOpen, const std::function<void()>& onStandbyDisplayOpen,
                         const std::function<void()>& onSettingsOpen, const std::function<void()>& onFileTransferOpen,
                         const std::function<void()>& onOpdsBrowserOpen)
       : Activity("Home", renderer, mappedInput),
         onSelectBook(onSelectBook),
         onMyLibraryOpen(onMyLibraryOpen),
         onRecentsOpen(onRecentsOpen),
+        onStandbyDisplayOpen(onStandbyDisplayOpen),
         onSettingsOpen(onSettingsOpen),
         onFileTransferOpen(onFileTransferOpen),
         onOpdsBrowserOpen(onOpdsBrowserOpen) {}
