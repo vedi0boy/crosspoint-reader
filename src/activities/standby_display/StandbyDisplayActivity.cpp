@@ -139,6 +139,10 @@ void StandbyDisplayActivity::render() {
     int updatedTextWidth = renderer.getTextWidth(BOOKERLY_12_FONT_ID, ("Updated: " + time).c_str(), EpdFontFamily::REGULAR);
     renderer.drawText(BOOKERLY_12_FONT_ID, renderer.getScreenWidth() - updatedTextWidth - 10, renderer.getScreenHeight() - renderer.getLineHeight(BOOKERLY_12_FONT_ID) - 10, ("Updated: " + time).c_str(), true, EpdFontFamily::REGULAR);
 
+    auto metrics = UITheme::getInstance().getMetrics();
+    GUI.drawBattery(renderer, Rect{10, renderer.getScreenHeight() - renderer.getLineHeight(BOOKERLY_12_FONT_ID), metrics.batteryWidth, metrics.batteryHeight},
+                    SETTINGS.hideBatteryPercentage == CrossPointSettings::HIDE_BATTERY_PERCENTAGE::HIDE_NEVER);
+
     renderer.displayBuffer();
     return;
   }
@@ -201,16 +205,8 @@ void StandbyDisplayActivity::updateWeather() {
   float rawTemp = doc["current"]["temperature_2m"].as<float>();
   float rawApparentTemp = doc["current"]["apparent_temperature"].as<float>();
 
-  std::stringstream ss;
-  ss << std::fixed;
-  ss << std::setprecision(1);
-  
-  ss << rawTemp;
-  temp = ss.str();
-  ss.str("");
-  ss.clear();
-  ss << rawApparentTemp;
-  apparentTemp = ss.str();
+  temp = std::to_string(static_cast<int>(std::round(rawTemp)));
+  apparentTemp = std::to_string(static_cast<int>(std::round(rawApparentTemp)));
 
   int weatherCode = doc["current"]["weather_code"].as<size_t>();
   if (weatherCode <= 19) {

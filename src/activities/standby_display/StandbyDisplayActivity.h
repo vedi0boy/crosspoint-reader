@@ -42,7 +42,7 @@ class StandbyDisplayActivity : public ActivityWithSubactivity {
   bool isHeavy = false;
   WeatherState weatherState;
 
-  const uint64_t UPDATE_INTERVAL = 10 * 60 * 1000; // 10 mins
+  const uint64_t UPDATE_INTERVAL = 30 * 60 * 1000; // 30 mins
   uint64_t lastUpdate;
 
  public:
