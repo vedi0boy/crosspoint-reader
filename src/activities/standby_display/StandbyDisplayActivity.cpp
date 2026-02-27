@@ -140,7 +140,7 @@ void StandbyDisplayActivity::render() {
     renderer.drawText(BOOKERLY_12_FONT_ID, renderer.getScreenWidth() - updatedTextWidth - 10, renderer.getScreenHeight() - renderer.getLineHeight(BOOKERLY_12_FONT_ID) - 10, ("Updated: " + time).c_str(), true, EpdFontFamily::REGULAR);
 
     auto metrics = UITheme::getInstance().getMetrics();
-    GUI.drawBattery(renderer, Rect{10, renderer.getScreenHeight() - renderer.getLineHeight(BOOKERLY_12_FONT_ID), metrics.batteryWidth, metrics.batteryHeight},
+    GUI.drawBatteryLeft(renderer, Rect{10, renderer.getScreenHeight() - renderer.getLineHeight(BOOKERLY_12_FONT_ID), metrics.batteryWidth, metrics.batteryHeight},
                     SETTINGS.hideBatteryPercentage == CrossPointSettings::HIDE_BATTERY_PERCENTAGE::HIDE_NEVER);
 
     renderer.displayBuffer();
